@@ -9,17 +9,59 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: Arial, sans-serif; background-color: #0f172a; color: #fff; padding: 20px; }
         .container { max-width: 1200px; margin: 0 auto; }
-        .profile-card { background-color: #1e293b; border-radius: 12px; padding: 30px 20px; text-align: center; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); }
-        .profile-card img.avatar { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 4px solid #3b82f6; margin-bottom: 15px; }
-        .profile-info h2 { font-size: 1.8rem; margin-bottom: 5px; }
-        .profile-info p { color: #94a3b8; font-size: 1rem; }
-        .actions { margin-top: 20px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
-        .btn { padding: 12px 24px; border-radius: 8px; text-decoration: none; color: white; font-weight: bold; background: #25d366; display: inline-flex; align-items: center; gap: 10px; }
+        
+        /* Card do Perfil */
+        .profile-card { 
+            background-color: #1e293b; 
+            border-radius: 16px; 
+            padding: 35px 20px; 
+            text-align: center; 
+            margin-bottom: 30px; 
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); 
+        }
+        
+        /* Foto de Perfil com Borda Brilhante (Glow Neon) */
+        .profile-card img.avatar { 
+            width: 150px; 
+            height: 150px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            border: 4px solid #3b82f6; 
+            box-shadow: 0 0 20px #3b82f6, 0 0 35px rgba(59, 130, 246, 0.5); 
+            margin-bottom: 15px; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .profile-card img.avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px #60a5fa, 0 0 50px rgba(96, 165, 250, 0.8);
+        }
+
+        .profile-info h2 { font-size: 2rem; margin-bottom: 5px; color: #f8fafc; }
+        .profile-info p { color: #94a3b8; font-size: 1.1rem; }
+        
+        .actions { margin-top: 25px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .btn { padding: 12px 26px; border-radius: 8px; text-decoration: none; color: white; font-weight: bold; background: #25d366; display: inline-flex; align-items: center; gap: 10px; transition: transform 0.2s; }
+        .btn:hover { transform: translateY(-2px); }
         .btn-email { background: #ea4335; }
+        
         .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px; padding-bottom: 10px; border-bottom: 1px solid #334155; }
-        .badge-count { background: #3b82f6; padding: 6px 14px; border-radius: 20px; font-size: 0.9em; font-weight: bold; }
+        .badge-count { background: #3b82f6; padding: 6px 14px; border-radius: 20px; font-size: 0.9em; font-weight: bold; box-shadow: 0 0 10px rgba(59, 130, 246, 0.5); }
+        
+        /* Grid e Efeito Brilhante nos Cards dos Certificados */
         .certificates-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
-        .cert-wrapper { background: #1e293b; border-radius: 8px; overflow: hidden; border: 1px solid #334155; min-height: 200px; }
+        .cert-wrapper { 
+            background: #1e293b; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            border: 1px solid #334155; 
+            min-height: 200px;
+            transition: all 0.3s ease;
+        }
+        .cert-wrapper:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+            transform: translateY(-4px);
+        }
         .cert-img { width: 100%; height: 200px; object-fit: cover; display: block; }
     </style>
 </head>
@@ -27,6 +69,7 @@
 
     <div class="container">
         <div class="profile-card">
+            <!-- Foto com borda brilhante integrada -->
             <img src="img/perfil.jpg" id="avatarImg" alt="Daniel Pereira" class="avatar">
             
             <div class="profile-info">
@@ -53,6 +96,7 @@
     </div>
 
     <script>
+        // Carrega foto de perfil (testa com ou sem pasta img)
         const avatar = document.getElementById('avatarImg');
         const tentativasPerfil = ['img/perfil.jpg', 'perfil.jpg', 'img/perfil.png', 'perfil.png'];
         let idxPerfil = 0;
@@ -63,55 +107,26 @@
             }
         };
 
+        // Carrega automaticamente os 84 certificados numerados em .jpg
         const grid = document.getElementById('certificatesgrid');
-        
-        // Artes / Banners de Serviços
-        const bannersEspeciais = [
-            '16308.png', '16309.png', '16310.png', 
-            '16311.png', '16312.png', '16313.png', '16317.png'
-        ];
+        const TOTAL_CERTIFICADOS = 84;
 
-        function adicionarImagem(listaTentativas) {
+        for (let i = 1; i <= TOTAL_CERTIFICADOS; i++) {
             const wrapper = document.createElement('div');
             wrapper.className = 'cert-wrapper';
 
             const img = document.createElement('img');
             img.className = 'cert-img';
             img.loading = 'lazy';
+            img.src = `img/certificado${i}.jpg`;
 
-            let index = 0;
-            img.src = listaTentativas[index];
-
+            // Caso algum número não exista ou seja a antiga foto de perfil, remove o quadro em branco
             img.onerror = function() {
-                index++;
-                if (index < listaTentativas.length) {
-                    this.src = listaTentativas[index];
-                } else {
-                    wrapper.remove();
-                }
+                wrapper.remove();
             };
 
             wrapper.appendChild(img);
             grid.appendChild(wrapper);
-        }
-
-        // 1. Carrega os Banners
-        bannersEspeciais.forEach(banner => {
-            adicionarImagem([`img/${banner}`, banner]);
-        });
-
-        // 2. Carrega os Certificados priorizando a pasta img/ e a extensão .png primeiro onde falhava
-        const TOTAL_CERTIFICADOS = 84;
-        for (let i = 1; i <= TOTAL_CERTIFICADOS; i++) {
-            const tentativas = [
-                `img/certificado${i}.png`,
-                `img/certificado${i}.jpg`,
-                `certificado${i}.png`,
-                `certificado${i}.jpg`,
-                `img/${i}.png`,
-                `img/${i}.jpg`
-            ];
-            adicionarImagem(tentativas);
         }
     </script>
 </body>
