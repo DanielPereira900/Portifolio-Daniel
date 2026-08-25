@@ -27,7 +27,7 @@
 
     <div class="container">
         <div class="profile-card">
-            <img src="perfil.jpg" id="avatarImg" alt="Daniel Pereira" class="avatar">
+            <img src="img/perfil.jpg" id="avatarImg" alt="Daniel Pereira" class="avatar">
             
             <div class="profile-info">
                 <h2>Daniel Pereira</h2>
@@ -54,7 +54,7 @@
 
     <script>
         const avatar = document.getElementById('avatarImg');
-        const tentativasPerfil = ['perfil.jpg', 'img/perfil.jpg', 'perfil.jpg.png', 'perfil.png'];
+        const tentativasPerfil = ['img/perfil.jpg', 'perfil.jpg', 'img/perfil.png', 'perfil.png'];
         let idxPerfil = 0;
         avatar.onerror = function() {
             idxPerfil++;
@@ -65,12 +65,10 @@
 
         const grid = document.getElementById('certificatesgrid');
         
-        // Mapeamento dos banners de serviço com nomes especiais
+        // Artes / Banners de Serviços
         const bannersEspeciais = [
             '16308.png', '16309.png', '16310.png', 
-            '16311.png', '16312.png', '16313.png', '16317.png',
-            'img/16308.png', 'img/16309.png', 'img/16310.png', 
-            'img/16311.png', 'img/16312.png', 'img/16313.png', 'img/16317.png'
+            '16311.png', '16312.png', '16313.png', '16317.png'
         ];
 
         function adicionarImagem(listaTentativas) {
@@ -97,21 +95,20 @@
             grid.appendChild(wrapper);
         }
 
-        // 1. Carrega primeiro as artes e banners de serviços
+        // 1. Carrega os Banners
         bannersEspeciais.forEach(banner => {
-            adicionarImagem([banner, `img/${banner}`]);
+            adicionarImagem([`img/${banner}`, banner]);
         });
 
-        // 2. Carrega a sequência padrão de certificados de 1 a 84
+        // 2. Carrega os Certificados priorizando a pasta img/ e a extensão .png primeiro onde falhava
         const TOTAL_CERTIFICADOS = 84;
         for (let i = 1; i <= TOTAL_CERTIFICADOS; i++) {
             const tentativas = [
-                `certificado${i}.jpg`,
+                `img/certificado${i}.png`,
                 `img/certificado${i}.jpg`,
                 `certificado${i}.png`,
-                `img/certificado${i}.png`,
-                `certificado${i}.jpg.png`,
-                `${i}.jpg`,
+                `certificado${i}.jpg`,
+                `img/${i}.png`,
                 `img/${i}.jpg`
             ];
             adicionarImagem(tentativas);
