@@ -45,8 +45,8 @@
         </div>
 
         <div class="section-header">
-            <h2><i class="fa-solid fa-award"></i> Meus Certificados</h2>
-            <span class="badge-count">84 Certificados</span>
+            <h2><i class="fa-solid fa-award"></i> Meus Certificados e Projetos</h2>
+            <span class="badge-count">84 itens</span>
         </div>
 
         <div class="certificates-grid" id="certificatesgrid"></div>
@@ -54,7 +54,7 @@
 
     <script>
         const avatar = document.getElementById('avatarImg');
-        const tentativasPerfil = ['perfil.jpg', 'img/perfil.jpg', 'perfil.jpg.png', 'perfil.png', 'IMG/perfil.jpg'];
+        const tentativasPerfil = ['perfil.jpg', 'img/perfil.jpg', 'perfil.jpg.png', 'perfil.png'];
         let idxPerfil = 0;
         avatar.onerror = function() {
             idxPerfil++;
@@ -64,44 +64,57 @@
         };
 
         const grid = document.getElementById('certificatesgrid');
-        const TOTAL_CERTIFICADOS = 84;
+        
+        // Mapeamento dos banners de serviço com nomes especiais
+        const bannersEspeciais = [
+            '16308.png', '16309.png', '16310.png', 
+            '16311.png', '16312.png', '16313.png', '16317.png',
+            'img/16308.png', 'img/16309.png', 'img/16310.png', 
+            'img/16311.png', 'img/16312.png', 'img/16313.png', 'img/16317.png'
+        ];
 
-        for (let i = 1; i <= TOTAL_CERTIFICADOS; i++) {
+        function adicionarImagem(listaTentativas) {
             const wrapper = document.createElement('div');
             wrapper.className = 'cert-wrapper';
 
             const img = document.createElement('img');
             img.className = 'cert-img';
-            img.alt = `Certificado ${i}`;
             img.loading = 'lazy';
 
-            // Mapeia tanto a raiz quanto a pasta img/IMG para resolver o problema dos certificados 8 a 13 e do 20
-            const tentativas = [
-                `img/certificado${i}.jpg`,
-                `img/certificado${i}.png`,
-                `IMG/certificado${i}.jpg`,
-                `certificado${i}.jpg`,
-                `certificado${i}.png`,
-                `certificado${i}.jpg.png`,
-                `img/${i}.jpg`,
-                `${i}.jpg`,
-                `${i}.png`
-            ];
-
-            let indexTentativa = 0;
-            img.src = tentativas[indexTentativa];
+            let index = 0;
+            img.src = listaTentativas[index];
 
             img.onerror = function() {
-                indexTentativa++;
-                if (indexTentativa < tentativas.length) {
-                    this.src = tentativas[indexTentativa];
+                index++;
+                if (index < listaTentativas.length) {
+                    this.src = listaTentativas[index];
                 } else {
-                    wrapper.style.display = 'none';
+                    wrapper.remove();
                 }
             };
 
             wrapper.appendChild(img);
             grid.appendChild(wrapper);
+        }
+
+        // 1. Carrega primeiro as artes e banners de serviços
+        bannersEspeciais.forEach(banner => {
+            adicionarImagem([banner, `img/${banner}`]);
+        });
+
+        // 2. Carrega a sequência padrão de certificados de 1 a 84
+        const TOTAL_CERTIFICADOS = 84;
+        for (let i = 1; i <= TOTAL_CERTIFICADOS; i++) {
+            const tentativas = [
+                `certificado${i}.jpg`,
+                `img/certificado${i}.jpg`,
+                `certificado${i}.png`,
+                `img/certificado${i}.png`,
+                `certificado${i}.jpg.png`,
+                `${i}.jpg`,
+                `img/${i}.jpg`
+            ];
+            adicionarImagem(tentativas);
         }
     </script>
 </body>
