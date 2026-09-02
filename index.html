@@ -244,3 +244,34 @@
     </script>
 </body>
 </html>
+<!-- ==========================================
+     COLE ESTE BLOCO ABAIXO NA ÚLTIMA LINHA DO ARQUIVO
+     ========================================== -->
+<style>
+@media print {
+    /* Configura o tamanho da folha do PDF */
+    @page {
+        size: A4;
+        margin: 1.5cm;
+    }
+    
+    /* Configura as cores do PDF para ficarem limpas e profissionais */
+    body {
+        background: white !important;
+        color: black !important;
+    }
+
+    /* Mantém os links do WhatsApp e E-mail funcionando e clicáveis no PDF */
+    a {
+        color: #0056b3 !important;
+        text-decoration: underline !important;
+    }
+
+    /* Evita que as fotos dos certificados fiquem cortadas ao meio entre as páginas */
+    div, img, section {
+        page-break-inside: avoid !important;
+        max-width: 100% !important;
+    }
+}
+</style>
+<!-- ========================================== -->
