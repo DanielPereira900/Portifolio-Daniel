@@ -6,6 +6,55 @@
     <title>Portfólio - Daniel Pereira</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+   #certificados-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 20px;
+}
+
+.certificado-item {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: transform 0.2s ease;
+}
+
+.certificado-item:hover {
+    transform: scale(1.05);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-conteudo {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 8px;
+}
+
+.fechar-btn {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #ffffff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+   
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0f172a; color: #fff; padding: 20px; }
         .container { max-width: 1200px; margin: 0 auto; }
@@ -161,7 +210,7 @@
             <span class="badge-count">130 itens</span>
         </div>
 
-        <div class="certificates-grid" id="certificatesgrid"></div>
+     
     </div>
 
     <!-- Estrutura do Modal de Visualização -->
@@ -169,7 +218,7 @@
         <span class="modal-close">&times;</span>
         <img class="modal-content" id="imgExpandida">
     </div>
-
+<div id="certificados-container" class="certificates-grid"></div>
     <script>
         // Função para abrir o Modal de Imagem Expandida
         function abrirModal(src) {
@@ -245,7 +294,48 @@ for (let i = 1; i <= TOTAL_CERTIFICADOS; i++) {
   ];
   carregarImagemInteligente(tentativas);
 }
-        
+  function abrirModal(src) {
+    const modal = document.getElementById('imageModal');
+    const imgExpandida = document.getElementById('imgExpandida');
+    if (modal && imgExpandida) {
+        imgExpandida.src = src;
+        modal.style.display = 'flex';
+    }
+}
+
+function fecharModal() {
+    const modal = document.getElementById('imageModal');
+    if (modal) modal.style.display = 'none';
+}
+
+function carregarCertificados() {
+    const container = document.getElementById("certificados-container");
+    if (!container) return; 
+
+    // 1. Carrega os certificados antigos (do 1 ao 86 em .jpg)
+    for (let i = 1; i <= 86; i++) {
+        const img = document.createElement("img");
+        img.src = `certificado${i}.jpg`; 
+        img.alt = `Certificado ${i}`;
+        img.classList.add("cert-wrapper");
+        img.onclick = function() { abrirModal(this.src); };
+        container.appendChild(img);
+    }
+
+    // 2. Carrega os certificados novos (do 100 ao 130 em .png)
+    for (let i = 100; i <= 130; i++) {
+        const img = document.createElement("img");
+        img.src = `Certificado${i}.png`; 
+        img.alt = `Certificado ${i}`;
+        img.classList.add("cert-wrapper");
+        img.onclick = function() { abrirModal(this.src); };
+        container.appendChild(img);
+    }
+}
+
+window.addEventListener("DOMContentLoaded", function() {
+    carregarCertificados();
+});      
     </script>
 </body>
 </html>
