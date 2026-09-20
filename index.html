@@ -5,262 +5,174 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfólio - Daniel de Jesus Pereira</title>
     
-    <!-- Biblioteca para gerar PDF -->
+    <!-- Biblioteca html2pdf para geração de PDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    
-    <!-- Ícones (FontAwesome) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background-color: #121214;
-            color: #e1e1e6;
-            display: flex;
-            justify-content: center;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
             padding: 20px;
         }
 
-        #portfolio-content {
-            background-color: #202024;
-            width: 100%;
-            max-width: 1100px;
-            padding: 35px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border: 1px solid #29292e;
-        }
-
-        /* Perfil Header */
-        .profile-header {
+        header {
             text-align: center;
-            border-bottom: 1px solid #323238;
-            padding-bottom: 25px;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
-        .avatar-container img {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #00875f;
-            margin-bottom: 15px;
-            box-shadow: 0 0 15px rgba(0, 135, 95, 0.3);
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
         }
 
-        .profile-header h1 {
-            font-size: 28px;
-            color: #ffffff;
-            margin-bottom: 6px;
-        }
-
-        .subtitle {
-            font-size: 16px;
-            color: #a8a8b3;
-            margin-bottom: 20px;
-        }
-
-        /* Botões de Contato e PDF */
-        .contact-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 18px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
+        .btn-pdf {
+            background-color: #008cba;
+            color: white;
             border: none;
-            transition: all 0.2s;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.1);
-        }
-
-        .btn-whatsapp { background-color: #25d366; color: #fff; }
-        .btn-email { background-color: #00875f; color: #fff; }
-        .btn-pdf { background-color: #dc3545; color: #fff; }
-
-        /* Contador */
-        .cert-counter {
-            margin: 25px 0 15px 0;
-            font-size: 18px;
-            font-weight: bold;
-            color: #00b37e;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* Grid da Galeria */
-        .grid-certificados {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-            gap: 18px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
             margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-pdf:hover {
+            background-color: #005f73;
+        }
+
+        /* Grid da Galeria de Certificados */
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .cert-card {
-            border: 1px solid #323238;
+            background-color: #1e1e1e;
+            border: 1px solid #333;
             border-radius: 8px;
-            overflow: hidden;
-            background: #121214;
-            cursor: pointer;
-            transition: transform 0.2s, border-color 0.2s;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s;
         }
 
         .cert-card:hover {
-            transform: scale(1.03);
-            border-color: #00b37e;
+            transform: translateY(-5px);
         }
 
         .cert-card img {
             width: 100%;
-            height: 145px;
+            height: 150px;
             object-fit: cover;
-            display: block;
-            background-color: #202024;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #2a2a2a;
         }
 
         .cert-card p {
-            padding: 10px;
-            font-size: 13px;
-            text-align: center;
-            background: #202024;
-            color: #c4c4cc;
-            font-weight: 600;
-            border-top: 1px solid #29292e;
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #cccccc;
         }
 
-        /* Modal (Zoom na imagem) */
+        /* Modal para ampliar imagem */
         .modal {
             display: none;
             position: fixed;
-            z-index: 1000;
-            left: 0;
             top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.9);
             justify-content: center;
             align-items: center;
+            z-index: 1000;
         }
 
-        .modal-content {
+        .modal img {
             max-width: 90%;
-            max-height: 85%;
-            border-radius: 6px;
-            border: 2px solid #00b37e;
-            box-shadow: 0 0 25px rgba(0, 179, 126, 0.3);
+            max-height: 90%;
+            border-radius: 8px;
         }
 
-        .close-btn {
+        .modal .fechar {
             position: absolute;
             top: 20px;
-            right: 35px;
-            color: #fff;
+            right: 30px;
+            color: white;
             font-size: 40px;
             font-weight: bold;
             cursor: pointer;
-        }
-
-        /* Impressão / PDF ajustado */
-        @media print {
-            body { background: #fff; color: #000; padding: 0; }
-            #portfolio-content { background: #fff; color: #000; border: none; box-shadow: none; }
-            .contact-buttons, .close-btn { display: none !important; }
-            .cert-card { border: 1px solid #ccc; background: #fff; }
-            .cert-card p { background: #eee; color: #000; }
         }
     </style>
 </head>
 <body>
 
     <div id="portfolio-content">
-        <!-- Cabeçalho / Perfil -->
-        <header class="profile-header">
-            <div class="avatar-container">
-                <img src="perfil.jpg" alt="Foto de Daniel de Jesus Pereira" onerror="this.onerror=null; this.src='perfiljpg.png';">
-            </div>
-            <h1>Daniel de Jesus Pereira</h1>
-            <p class="subtitle">Desenvolvedor / Analista de Sistemas</p>
-
-            <!-- Botões de Ação Direta -->
-            <div class="contact-buttons">
-                <a href="https://wa.me/5516991768327" target="_blank" class="btn btn-whatsapp">
-                    <i class="fab fa-whatsapp"></i> (16) 99176-8327
-                </a>
-                <a href="mailto:danielj.pereira2@gmail.com" class="btn btn-email">
-                    <i class="fas fa-envelope"></i> danielj.pereira2@gmail.com
-                </a>
-                <a href="mailto:danieldejesus.pereira86@gmail.com" class="btn btn-email">
-                    <i class="fas fa-envelope"></i> danieldejesus.pereira86@gmail.com
-                </a>
-                <button onclick="baixarPDF()" class="btn btn-pdf">
-                    <i class="fas fa-file-pdf"></i> Baixar PDF
-                </button>
-            </div>
+        <header>
+            <h1>Portfólio de Certificados</h1>
+            <p>Daniel de Jesus Pereira</p>
+            <button class="btn-pdf" onclick="baixarPDF()">Baixar Portfólio em PDF</button>
         </header>
 
-        <main>
-            <!-- Contador -->
-            <div class="cert-counter">
-                <i class="fas fa-certificate"></i>
-                <span>Certificados e Projetos (<span id="total-certificados">114</span>)</span>
-            </div>
-
-            <!-- Galeria -->
-            <div id="galeria-certificados" class="grid-certificados"></div>
-        </main>
+        <!-- Galeria onde os certificados serão inseridos -->
+        <div class="galeria" id="galeria-certificados"></div>
     </div>
 
-    <!-- Modal para Ampliar Imagem -->
+    <!-- Modal para visualização ampliada -->
     <div id="modal" class="modal" onclick="fecharModal()">
-        <span class="close-btn">&times;</span>
-        <img class="modal-content" id="img-ampliada" alt="Certificado Ampliado">
+        <span class="fechar">&times;</span>
+        <img id="img-ampliada" src="" alt="Certificado Ampliado">
     </div>
 
     <script>
         const TOTAL_CERTIFICADOS = 114;
         const galeria = document.getElementById('galeria-certificados');
 
-        // Função inteligente para testar vários formatos de nomes de arquivo
         function carregarCertificado(index) {
             const card = document.createElement('div');
             card.className = 'cert-card';
 
+            // Lista com todas as combinações possíveis de nome e extensão
             const tentativas = [
-                `certificado${index}.jpg`,
-                `Certificado ${index}.jpg`,
                 `Certificado${index}.jpg`,
-                `${index}.jpg`
+                `Certificado${index}.png`,
+                `Certificado${index}.jpeg`,
+                `certificado${index}.jpg`,
+                `certificado${index}.png`,
+                `certificado${index}.jpeg`,
+                `Certificado ${index}.jpg`,
+                `Certificado ${index}.png`,
+                `certificado ${index}.jpg`,
+                `certificado ${index}.png`,
+                `Certificado${index}.JPG`,
+                `Certificado${index}.PNG`,
+                `certificado${index}.JPG`,
+                `certificado${index}.PNG`,
+                `${index}.jpg`,
+                `${index}.png`
             ];
 
             let tentativaAtual = 0;
 
             const img = document.createElement('img');
             img.src = tentativas[0];
-            img.alt = `Certificado ${index}`;
+            img.alt = `Certificado #${index}`;
             img.loading = 'lazy';
 
-            // Se der erro de carregamento, tenta o próximo nome da lista
+            // Caso a imagem falhe ao carregar, tenta a próxima opção da lista
             img.onerror = function() {
                 tentativaAtual++;
                 if (tentativaAtual < tentativas.length) {
@@ -281,12 +193,11 @@
             galeria.appendChild(card);
         }
 
-        // Gera os 114 certificados
+        // Gera os cards do certificado 1 até o 114
         for (let i = 1; i <= TOTAL_CERTIFICADOS; i++) {
             carregarCertificado(i);
         }
 
-        // Função do Zoom (Modal)
         function ampliarImagem(src) {
             const modal = document.getElementById('modal');
             const imgAmpliada = document.getElementById('img-ampliada');
@@ -298,7 +209,6 @@
             document.getElementById('modal').style.display = 'none';
         }
 
-        // Gerar PDF
         function baixarPDF() {
             const elemento = document.getElementById('portfolio-content');
             const opcoes = {
