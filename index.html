@@ -3,12 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfólio - Daniel de Jesus Pereira</title>
+    <title>Portfólio de Certificados | Daniel de Jesus Pereira</title>
     
-    <!-- Biblioteca html2pdf para geração de PDF -->
+    <!-- Ícones Font Awesome para o Cabeçalho -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Biblioteca html2pdf -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-color: #38bdf8;
+            --accent-hover: #0284c7;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -16,78 +29,158 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
-            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding: 30px 15px;
+            line-height: 1.6;
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        h1 {
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-
-        .btn-pdf {
-            background-color: #008cba;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 15px;
-            transition: background-color 0.3s;
-        }
-
-        .btn-pdf:hover {
-            background-color: #005f73;
-        }
-
-        /* Grid da Galeria de Certificados */
-        .galeria {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
+        .container {
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .cert-card {
-            background-color: #1e1e1e;
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 10px;
+        /* Header / Perfil */
+        header {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            transition: transform 0.2s;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        header .subtitle {
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        /* Informações de Contato */
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .contact-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            color: var(--text-main);
+            border-color: var(--accent-color);
+            background: rgba(56, 189, 248, 0.1);
+        }
+
+        .contact-item i {
+            color: var(--accent-color);
+        }
+
+        .btn-pdf {
+            background-color: var(--accent-color);
+            color: #0f172a;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 14px rgba(56, 189, 248, 0.3);
+        }
+
+        .btn-pdf:hover {
+            background-color: var(--accent-hover);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        /* Galeria */
+        .galeria-titulo {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 12px;
+        }
+
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .cert-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
 
         .cert-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.4);
+            border-color: var(--accent-color);
+        }
+
+        .cert-card .img-container {
+            width: 100%;
+            height: 160px;
+            background-color: #020617;
+            position: relative;
+            overflow: hidden;
         }
 
         .cert-card img {
             width: 100%;
-            height: 150px;
+            height: 100%;
             object-fit: cover;
-            border-radius: 4px;
             cursor: pointer;
-            background-color: #2a2a2a;
+            transition: transform 0.3s ease;
+        }
+
+        .cert-card:hover img {
+            transform: scale(1.05);
         }
 
         .cert-card p {
-            margin-top: 10px;
-            font-weight: bold;
-            font-size: 14px;
-            color: #cccccc;
+            padding: 12px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
         }
 
-        /* Modal para ampliar imagem */
+        /* Modal Visualizador */
         .modal {
             display: none;
             position: fixed;
@@ -95,43 +188,69 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(5px);
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            padding: 20px;
         }
 
         .modal img {
             max-width: 90%;
-            max-height: 90%;
+            max-height: 85vh;
             border-radius: 8px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
         }
 
         .modal .fechar {
             position: absolute;
             top: 20px;
             right: 30px;
-            color: white;
-            font-size: 40px;
-            font-weight: bold;
+            color: var(--text-main);
+            font-size: 35px;
             cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .modal .fechar:hover {
+            color: var(--accent-color);
         }
     </style>
 </head>
 <body>
 
-    <div id="portfolio-content">
+    <div class="container" id="portfolio-content">
         <header>
-            <h1>Portfólio de Certificados</h1>
-            <p>Daniel de Jesus Pereira</p>
-            <button class="btn-pdf" onclick="baixarPDF()">Baixar Portfólio em PDF</button>
+            <h1>Daniel de Jesus Pereira</h1>
+            <p class="subtitle">Análise e Desenvolvimento de Sistemas | Automação & Sistemas</p>
+            
+            <!-- SEUS DADOS DE CONTATO -->
+            <div class="contact-info">
+                <a href="https://wa.me/5500000000000" target="_blank" class="contact-item">
+                    <i class="fab fa-whatsapp"></i> (00) 00000-0000
+                </a>
+                <a href="mailto:seuemail@email.com" class="contact-item">
+                    <i class="fas fa-envelope"></i> seuemail@email.com
+                </a>
+                <a href="https://github.com/DanielPereira900" target="_blank" class="contact-item">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <a href="https://linkedin.com" target="_blank" class="contact-item">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+            </div>
+
+            <button class="btn-pdf" onclick="baixarPDF()">
+                <i class="fas fa-file-pdf"></i> Baixar Portfólio em PDF
+            </button>
         </header>
 
-        <!-- Galeria onde os certificados serão inseridos -->
+        <h2 class="galeria-titulo">Galeria de Certificados</h2>
         <div class="galeria" id="galeria-certificados"></div>
     </div>
 
-    <!-- Modal para visualização ampliada -->
+    <!-- Modal para zoom da imagem -->
     <div id="modal" class="modal" onclick="fecharModal()">
         <span class="fechar">&times;</span>
         <img id="img-ampliada" src="" alt="Certificado Ampliado">
@@ -141,28 +260,39 @@
         const TOTAL_CERTIFICADOS = 114;
         const galeria = document.getElementById('galeria-certificados');
 
+        // Função para formatar o número com zeros à esquerda
+        function padZero(num, size) {
+            let s = num + "";
+            while (s.length < size) s = "0" + s;
+            return s;
+        }
+
         function carregarCertificado(index) {
             const card = document.createElement('div');
             card.className = 'cert-card';
 
-            // Lista com todas as combinações possíveis de nome e extensão
+            const imgContainer = document.createElement('div');
+            imgContainer.className = 'img-container';
+
+            // Inclui todas as combinações normais E com zeros (ex: Certificado0087.jpg)
+            const num3 = padZero(index, 3); // ex: 087
+            const num4 = padZero(index, 4); // ex: 0087
+
             const tentativas = [
+                `Certificado${num4}.jpg`,
+                `Certificado${num3}.jpg`,
                 `Certificado${index}.jpg`,
+                `Certificado${num4}.png`,
+                `Certificado${num3}.png`,
                 `Certificado${index}.png`,
-                `Certificado${index}.jpeg`,
+                `certificado${num4}.jpg`,
+                `certificado${num3}.jpg`,
                 `certificado${index}.jpg`,
+                `certificado${num4}.png`,
+                `certificado${num3}.png`,
                 `certificado${index}.png`,
-                `certificado${index}.jpeg`,
                 `Certificado ${index}.jpg`,
-                `Certificado ${index}.png`,
-                `certificado ${index}.jpg`,
-                `certificado ${index}.png`,
-                `Certificado${index}.JPG`,
-                `Certificado${index}.PNG`,
-                `certificado${index}.JPG`,
-                `certificado${index}.PNG`,
-                `${index}.jpg`,
-                `${index}.png`
+                `Certificado ${index}.png`
             ];
 
             let tentativaAtual = 0;
@@ -172,7 +302,6 @@
             img.alt = `Certificado #${index}`;
             img.loading = 'lazy';
 
-            // Caso a imagem falhe ao carregar, tenta a próxima opção da lista
             img.onerror = function() {
                 tentativaAtual++;
                 if (tentativaAtual < tentativas.length) {
@@ -184,7 +313,8 @@
                 ampliarImagem(this.src);
             };
 
-            card.appendChild(img);
+            imgContainer.appendChild(img);
+            card.appendChild(imgContainer);
 
             const p = document.createElement('p');
             p.innerText = `Certificado #${index}`;
@@ -193,7 +323,6 @@
             galeria.appendChild(card);
         }
 
-        // Gera os cards do certificado 1 até o 114
         for (let i = 1; i <= TOTAL_CERTIFICADOS; i++) {
             carregarCertificado(i);
         }
