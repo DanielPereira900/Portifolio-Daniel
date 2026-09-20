@@ -158,7 +158,7 @@
 
         <div class="section-header">
             <h2><i class="fa-solid fa-award"></i> Meus Certificados e Projetos</h2>
-            <span class="badge-count">115 itens</span>
+            <span class="badge-count">130 itens</span>
         </div>
 
         <div class="certificates-grid" id="certificatesgrid"></div>
@@ -229,21 +229,23 @@
             grid.appendChild(wrapper);
         }
 
-        // Percorre do item 1 até o 115
-        const TOTAL_CERTIFICADOS = 115;
-        for (let i = 1; i <= TOTAL_CERTIFICADOS; i++) {
-            const tentativas = [
-                `img/certificado${i}.jpg`,
-                `img/${i}.jpg`,
-                `certificado${i}.jpg`,
-                `${i}.jpg`,
-                `img/certificado${i}.png`,
-                `img/${i}.png`,
-                `certificado${i}.png`,
-                `${i}.png`
-            ];
-            carregarImagemInteligente(tentativas);
-        }
+        //// Percorre do item 1 até o 130
+const TOTAL_CERTIFICADOS = 130;
+for (let i = 1; i <= TOTAL_CERTIFICADOS; i++) {
+  const tentativas = [
+    `img/Certificado ${i}.jpg`,
+    `img/certificado${i}.jpg`,
+    `img/${i}.jpg`,
+    `certificado${i}.jpg`,
+    `${i}.jpg`,
+    `img/certificado${i}.png`,
+    `img/${i}.png`,
+    `certificado${i}.png`,
+    `${i}.png`
+  ];
+  carregarImagemInteligente(tentativas);
+}
+        
     </script>
 </body>
 </html>
