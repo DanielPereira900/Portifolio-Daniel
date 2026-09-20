@@ -236,24 +236,23 @@
 
     <div class="container" id="portfolio-content">
         <header>
-            <!-- Foto de Perfil com fallback automático caso seja .png ou .jpeg -->
-            <img id="foto-perfil" src="perfil.jpg" alt="Foto de Daniel de Jesus Pereira" class="profile-img" onerror="tentarOutraFoto(this)">
+            <!-- Foto puxada diretamente do seu perfil do GitHub DanielPereira900 -->
+            <img src="https://github.com/DanielPereira900.png" alt="Foto de Daniel de Jesus Pereira" class="profile-img">
 
             <h1>Daniel de Jesus Pereira</h1>
             <p class="subtitle">Análise e Desenvolvimento de Sistemas | Automação & Sistemas</p>
             
-            <!-- DADOS CORRIGIDOS -->
             <div class="contact-info">
                 <a href="https://wa.me/5516991768327" target="_blank" class="contact-item">
                     <i class="fab fa-whatsapp"></i> (16) 99176-8327
                 </a>
-                <a href="mailto:Danielj.pereira2@gmail.com" class="contact-item">
-                    <i class="fas fa-envelope"></i> Danielj.pereira2@gmail.com
+                <a href="mailto:Daniel.pereira2@gmail.com" class="contact-item">
+                    <i class="fas fa-envelope"></i> Daniel.pereira2@gmail.com
                 </a>
                 <a href="mailto:DanieldeJesusPereira86@gmail.com" class="contact-item">
                     <i class="fas fa-envelope"></i> DanieldeJesusPereira86@gmail.com
                 </a>
-                <a href="https://github.com/Danielj.Pereira900" target="_blank" class="contact-item">
+                <a href="https://github.com/DanielPereira900" target="_blank" class="contact-item">
                     <i class="fab fa-github"></i> GitHub
                 </a>
             </div>
@@ -274,16 +273,6 @@
     </div>
 
     <script>
-        // Tenta formatos alternativos caso perfil.jpg não exista
-        function tentarOutraFoto(img) {
-            const fotos = ['perfil.png', 'perfil.jpeg', 'Perfil.jpg', 'Perfil.png'];
-            let idx = img.dataset.tentativa || 0;
-            if (idx < fotos.length) {
-                img.dataset.tentativa = parseInt(idx) + 1;
-                img.src = fotos[idx];
-            }
-        }
-
         const TOTAL_CERTIFICADOS = 114;
         const galeria = document.getElementById('galeria-certificados');
 
