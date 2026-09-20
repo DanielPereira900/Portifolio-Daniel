@@ -148,7 +148,7 @@
                     <i class="fa-brands fa-whatsapp"></i> (16) 99176-8327
                 </a>
                 <a href="mailto:danielj.pereira2@gmail.com" class="btn btn-email">
-                    <i class="fa-solid fa-envelope"></i> danielj.pereira2@gmail.com
+                    <i class="fa-solid fa-envelope"></i> Danielj.pereira2@gmail.com
                     <a href="mailto:DanieldeJesusPereira86@gmail.com" class="btn btn-email">
     <i class="fa-solid fa-envelope"></i> DanieldeJesusPereira86@gmail.com
 </a>
@@ -228,13 +228,13 @@
             wrapper.appendChild(img);
             grid.appendChild(wrapper);
         }
-
-        //// Percorre do item 1 até o 130
+// Percorre do item 1 até o 130
 const TOTAL_CERTIFICADOS = 130;
 for (let i = 1; i <= TOTAL_CERTIFICADOS; i++) {
   const tentativas = [
-    `img/Certificado ${i}.jpg`,
-    `img/certificado${i}.jpg`,
+    `img/Certificado ${i}.jpg`, // Para "Certificado 100.jpg" (Com C maiúsculo e ESPAÇO)
+    `img/Certificado${i}.jpg`,  // Para "Certificado100.jpg" (Com C maiúsculo e SEM espaço)
+    `img/certificado${i}.jpg`,  // Para "certificado100.jpg" (Tudo minúsculo - do 1 ao 86)
     `img/${i}.jpg`,
     `certificado${i}.jpg`,
     `${i}.jpg`,
