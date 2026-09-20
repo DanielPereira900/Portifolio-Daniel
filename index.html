@@ -3,370 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfólio - Daniel Pereira</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-   #certificados-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 20px;
-}
-
-.certificado-item {
-    width: 150px;
-    height: 100px;
-    object-fit: cover;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: transform 0.2s ease;
-}
-
-.certificado-item:hover {
-    transform: scale(1.05);
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.modal-conteudo {
-    max-width: 90%;
-    max-height: 90%;
-    border-radius: 8px;
-}
-
-.fechar-btn {
-    position: absolute;
-    top: 20px;
-    right: 35px;
-    color: #ffffff;
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-}
-   
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0f172a; color: #fff; padding: 20px; }
-        .container { max-width: 1200px; margin: 0 auto; }
-        
-        /* Card do Perfil com sombra brilhante */
-        .profile-card { 
-            background-color: #1e293b; 
-            border-radius: 16px; 
-            padding: 40px 20px; 
-            text-align: center; 
-            margin-bottom: 35px; 
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            box-shadow: 0 0 25px rgba(59, 130, 246, 0.2); 
-        }
-        
-        /* Foto de Perfil Circular com Luz Neon */
-        .profile-card img.avatar { 
-            width: 150px; 
-            height: 150px; 
-            border-radius: 50%; 
-            object-fit: cover; 
-            border: 4px solid #3b82f6; 
-            box-shadow: 0 0 20px #3b82f6, 0 0 40px rgba(59, 130, 246, 0.6); 
-            margin-bottom: 15px; 
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .profile-card img.avatar:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px #60a5fa, 0 0 60px rgba(96, 165, 250, 0.9);
-        }
-
-        /* Nome com efeito brilhante */
-        .profile-info h2 { 
-            font-size: 2.2rem; 
-            margin-bottom: 6px; 
-            color: #ffffff;
-            text-shadow: 0 0 12px rgba(96, 165, 250, 0.8);
-        }
-        .profile-info p { color: #94a3b8; font-size: 1.1rem; }
-        
-        /* Botões Clicáveis e Luminosos */
-        .actions { margin-top: 25px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
-        .btn { 
-            padding: 14px 24px; 
-            border-radius: 10px; 
-            text-decoration: none; 
-            color: white; 
-            font-weight: bold; 
-            background: #25d366; 
-            display: inline-flex; 
-            align-items: center; 
-            gap: 10px; 
-            box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
-            transition: all 0.3s ease; 
-        }
-        .btn:hover { 
-            transform: translateY(-3px); 
-            box-shadow: 0 0 25px rgba(37, 211, 102, 0.8);
-        }
-        .btn-email { 
-            background: #ea4335; 
-            box-shadow: 0 0 15px rgba(234, 67, 53, 0.4);
-        }
-        .btn-email:hover {
-            box-shadow: 0 0 25px rgba(234, 67, 53, 0.8);
-        }
-        
-        /* Cabeçalho dos Certificados */
-        .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px; padding-bottom: 10px; border-bottom: 1px solid #334155; }
-        .section-header h2 { text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); }
-        .badge-count { background: #3b82f6; padding: 6px 14px; border-radius: 20px; font-size: 0.9em; font-weight: bold; box-shadow: 0 0 12px rgba(59, 130, 246, 0.6); }
-        
-        /* Grid dos Certificados */
-        .certificates-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
-        .cert-wrapper { 
-            background: #1e293b; 
-            border-radius: 12px; 
-            overflow: hidden; 
-            border: 1px solid #334155; 
-            min-height: 200px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .cert-wrapper:hover {
-            border-color: #3b82f6;
-            box-shadow: 0 0 18px rgba(59, 130, 246, 0.5);
-            transform: translateY(-4px);
-        }
-        .cert-img { width: 100%; height: 200px; object-fit: cover; display: block; }
-
-        /* Modal / Pop-up para Ampliar Imagens ao Clicar */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        .modal-content {
-            max-width: 90%;
-            max-height: 90vh;
-            border-radius: 8px;
-            box-shadow: 0 0 25px rgba(59, 130, 246, 0.6);
-            object-fit: contain;
-        }
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 35px;
-            color: #fff;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .modal-close:hover { color: #3b82f6; }
-    </style>
+    <title>Portfólio - Daniel de Jesus Pereira</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Biblioteca para gerar o PDF automaticamente -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
 
-    <div class="container">
-        <div class="profile-card">
-            <!-- Foto de Perfil -->
-            <img src="img/perfil.jpg" id="avatarImg" alt="Daniel Pereira" class="avatar">
-            
-            <div class="profile-info">
-                <h2>Daniel de jesus Pereira</h2>
-                <p>Desenvolvedor / Analista de Sistemas</p>
+    <!-- Container Principal que será exportado para o PDF -->
+    <div id="portfolio-content">
+        <!-- Seção do Perfil/Cabeçalho -->
+        <header class="profile-header">
+            <div class="avatar-container">
+                <img src="img/perfil.jpg" alt="Foto de Daniel de Jesus Pereira" class="avatar">
             </div>
+            
+            <h1>Daniel de Jesus Pereira</h1>
+            <p class="subtitle">Desenvolvedor / Analista de Sistemas</p>
 
             <!-- Botões de Contato -->
-            <div class="actions">
-                <a href="https://wa.me/5516991768327?text=Olá%20Daniel,%20vim%20pelo%20seu%20portfolio" class="btn" target="_blank">
-                    <i class="fa-brands fa-whatsapp"></i> (16) 99176-8327
+            <div class="contact-buttons">
+                <a href="https://wa.me/5516991768327" target="_blank" class="btn btn-whatsapp">
+                    📞 (16) 99176-8327
                 </a>
                 <a href="mailto:danielj.pereira2@gmail.com" class="btn btn-email">
-                    <i class="fa-solid fa-envelope"></i> Danielj.pereira2@gmail.com
-                    <a href="mailto:DanieldeJesusPereira86@gmail.com" class="btn btn-email">
-    <i class="fa-solid fa-envelope"></i> DanieldeJesusPereira86@gmail.com
-</a>
+                    ✉️ danielj.pereira2@gmail.com
                 </a>
+                <a href="mailto:danieldejesus.pereira86@gmail.com" class="btn btn-email">
+                    ✉️ danieldejesus.pereira86@gmail.com
+                </a>
+                <!-- Botão para Baixar/Gerar o PDF -->
+                <button id="btn-pdf" class="btn btn-pdf">
+                    📄 Baixar Portfólio em PDF
+                </button>
             </div>
-        </div>
+        </header>
 
-        <div class="section-header">
-            <h2><i class="fa-solid fa-award"></i> Meus Certificados e Projetos</h2>
-            <span class="badge-count">130 itens</span>
-        </div>
-
-     
+        <!-- Seção de Certificados -->
+        <main class="content">
+            <h2>Certificados e Projetos</h2>
+            <div id="galeria-certificados" class="grid-certificados"></div>
+        </main>
     </div>
 
-    <!-- Estrutura do Modal de Visualização -->
-    <div id="imageModal" class="modal" onclick="fecharModal()">
-        <span class="modal-close">&times;</span>
-        <img class="modal-content" id="imgExpandida">
+    <!-- Modal para Ampliar o Certificado Clicado -->
+    <div id="modal" class="modal">
+        <span class="close-btn">&times;</span>
+        <img class="modal-content" id="img-ampliada" alt="Certificado Ampliado">
     </div>
-<div id="certificados-container" class="certificates-grid"></div>
-    <script>
-        // Função para abrir o Modal de Imagem Expandida
-        function abrirModal(src) {
-            const modal = document.getElementById('imageModal');
-            const imgExpandida = document.getElementById('imgExpandida');
-            imgExpandida.src = src;
-            modal.style.display = 'flex';
-        }
 
-        function fecharModal() {
-            document.getElementById('imageModal').style.display = 'none';
-        }
-
-        // Carrega foto de perfil
-        const avatar = document.getElementById('avatarImg');
-        const tentativasPerfil = [
-            'img/perfil.jpg', 'perfil.jpg', 
-            'img/foto perfil.jpg', 'foto perfil.jpg', 
-            'img/perfil.png', 'perfil.png'
-        ];
-        let idxPerfil = 0;
-        avatar.onerror = function() {
-            idxPerfil++;
-            if (idxPerfil < tentativasPerfil.length) {
-                this.src = tentativasPerfil[idxPerfil];
-            }
-        };
-
-        const grid = document.getElementById('certificatesgrid');
-
-        function carregarImagemInteligente(listaTentativas) {
-            const wrapper = document.createElement('div');
-            wrapper.className = 'cert-wrapper';
-
-            const img = document.createElement('img');
-            img.className = 'cert-img';
-            img.loading = 'lazy';
-
-            let index = 0;
-            img.src = listaTentativas[index];
-
-            img.onerror = function() {
-                index++;
-                if (index < listaTentativas.length) {
-                    this.src = listaTentativas[index];
-                } else {
-                    wrapper.remove();
-                }
-            };
-
-            // Ao clicar na imagem ou no quadro, abre a visualização ampliada
-            wrapper.onclick = function() {
-                abrirModal(img.src);
-            };
-
-            wrapper.appendChild(img);
-            grid.appendChild(wrapper);
-        }
-// Percorre do item 1 até o 130
-const TOTAL_CERTIFICADOS = 130;
-for (let i = 1; i <= TOTAL_CERTIFICADOS; i++) {
-  const tentativas = [
-    `img/Certificado ${i}.jpg`, // Para "Certificado 100.jpg" (Com C maiúsculo e ESPAÇO)
-    `img/Certificado${i}.jpg`,  // Para "Certificado100.jpg" (Com C maiúsculo e SEM espaço)
-    `img/certificado${i}.jpg`,  // Para "certificado100.jpg" (Tudo minúsculo - do 1 ao 86)
-    `img/${i}.jpg`,
-    `certificado${i}.jpg`,
-    `${i}.jpg`,
-    `img/certificado${i}.png`,
-    `img/${i}.png`,
-    `certificado${i}.png`,
-    `${i}.png`
-  ];
-  carregarImagemInteligente(tentativas);
-}
-  function abrirModal(src) {
-    const modal = document.getElementById('imageModal');
-    const imgExpandida = document.getElementById('imgExpandida');
-    if (modal && imgExpandida) {
-        imgExpandida.src = src;
-        modal.style.display = 'flex';
-    }
-}
-
-function fecharModal() {
-    const modal = document.getElementById('imageModal');
-    if (modal) modal.style.display = 'none';
-}
-
-function carregarCertificados() {
-    const container = document.getElementById("certificados-container");
-    if (!container) return; 
-
-    // 1. Carrega os certificados antigos (do 1 ao 86 em .jpg)
-    for (let i = 1; i <= 86; i++) {
-        const img = document.createElement("img");
-        img.src = `certificado${i}.jpg`; 
-        img.alt = `Certificado ${i}`;
-        img.classList.add("cert-wrapper");
-        img.onclick = function() { abrirModal(this.src); };
-        container.appendChild(img);
-    }
-
-    // 2. Carrega os certificados novos (do 100 ao 130 em .png)
-    for (let i = 100; i <= 130; i++) {
-        const img = document.createElement("img");
-        img.src = `Certificado${i}.png`; 
-        img.alt = `Certificado ${i}`;
-        img.classList.add("cert-wrapper");
-        img.onclick = function() { abrirModal(this.src); };
-        container.appendChild(img);
-    }
-}
-
-window.addEventListener("DOMContentLoaded", function() {
-    carregarCertificados();
-});      
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
-<!-- ==========================================
-     COLE ESTE BLOCO ABAIXO NA ÚLTIMA LINHA DO ARQUIVO
-     ========================================== -->
-<style>
-@media print {
-    /* Configura o tamanho da folha do PDF */
-    @page {
-        size: A4;
-        margin: 1.5cm;
-    }
-    
-    /* Configura as cores do PDF para ficarem limpas e profissionais */
-    body {
-        background: white !important;
-        color: black !important;
-    }
-
-    /* Mantém os links do WhatsApp e E-mail funcionando e clicáveis no PDF */
-    a {
-        color: #0056b3 !important;
-        text-decoration: underline !important;
-    }
-
-    /* Evita que as fotos dos certificados fiquem cortadas ao meio entre as páginas */
-    div, img, section {
-        page-break-inside: avoid !important;
-        max-width: 100% !important;
-    }
-}
-</style>
-<!-- ========================================== -->
